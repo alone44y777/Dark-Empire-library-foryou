@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Empire Library Hub - Discover millions of books, authors, and knowledge resources instantly.">
+<meta name="theme-color" content="#6366f1">
+<title>Empire Library Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --accent: #f59e0b;
+  --card-bg: rgba(255,255,255,0.07);
+  --card-border: rgba(255,255,255,0.12);
+  --btn-bg: #6366f1;
+  --btn-text: #fff;
+  --bg: #0f0f1a;
+  --bg2: #13131f;
+  --surface: #1a1a2e;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border: rgba(255,255,255,0.08);
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --nav-h: 70px;
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.theme-light {
+  --bg: #f8fafc; --bg2: #f1f5f9; --surface: #ffffff;
+  --text: #0f172a; --text-muted: #64748b;
+  --card-bg: rgba(255,255,255,0.9); --card-border: rgba(0,0,0,0.08);
+  --border: rgba(0,0,0,0.06); --shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.theme-ocean {
+  --bg: #0c1a2e; --bg2: #0f2340; --surface: #112a4a;
+  --primary: #0ea5e9; --primary-light: #38bdf8; --btn-bg: #0ea5e9;
+  --card-bg: rgba(14,165,233,0.08);
+}
+.theme-purple {
+  --bg: #0d001a; --bg2: #130026; --surface: #1a003a;
+  --primary: #a855f7; --primary-light: #c084fc; --btn-bg: #a855f7;
+  --card-bg: rgba(168,85,247,0.08);
+}
+.theme-pink {
+  --bg: #1a0010; --bg2: #200015; --surface: #2d001e;
+  --primary: #ec4899; --primary-light: #f472b6; --btn-bg: #ec4899;
+  --card-bg: rgba(236,72,153,0.08);
+}
+.theme-emerald {
+  --bg: #001a10; --bg2: #002015; --surface: #002d1c;
+  --primary: #10b981; --primary-light: #34d399; --btn-bg: #10b981;
+  --card-bg: rgba(16,185,129,0.08);
+}
+.theme-orange {
+  --bg: #1a0a00; --bg2: #200d00; --surface: #2d1500;
+  --primary: #f97316; --primary-light: #fb923c; --btn-bg: #f97316;
+  --card-bg: rgba(249,115,22,0.08);
+}
+.theme-crimson {
+  --bg: #1a0000; --bg2: #200000; --surface: #2d0000;
+  --primary: #ef4444; --primary-light: #f87171; --btn-bg: #ef4444;
+  --card-bg: rgba(239,68,68,0.08);
+}
+.theme-cyber {
+  --bg: #00050f; --bg2: #000a1a; --surface: #000d22;
+  --primary: #00d4ff; --primary-light: #67e8f9; --btn-bg: #00d4ff; --btn-text: #000;
+  --card-bg: rgba(0,212,255,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:var(--transition)}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;font-family:inherit}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;background:rgba(15,15,26,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:var(--transition)}
+.theme-light nav{background:rgba(248,250,252,0.9)}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 20px;height:100%;display:flex;align-items:center;gap:20px}
+.logo-wrap{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.logo-ring{width:46px;height:46px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--primary),var(--accent),var(--primary-light));flex-shrink:0;box-shadow:0 0 12px rgba(99,102,241,0.5)}
+.logo-img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.logo-fallback{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#fff;letter-spacing:-1px}
+.logo-text{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,var(--primary-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:4px;margin-left:auto}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:0.875rem;font-weight:500;color:var(--text-muted);transition:var(--transition)}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--card-bg)}
+.nav-actions{display:flex;align-items:center;gap:10px;margin-left:10px}
+.btn-icon{width:38px;height:38px;border-radius:10px;background:var(--card-bg);border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;font-size:1rem;transition:var(--transition);color:var(--text)}
+.btn-icon:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:var(--transition)}
+
+/* MOBILE NAV */
+.mobile-nav{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);z-index:999;padding:16px 20px;flex-direction:column;gap:6px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{padding:12px 16px;border-radius:10px;font-weight:500;color:var(--text-muted);transition:var(--transition)}
+.mobile-nav a:hover{background:var(--card-bg);color:var(--text)}
+
+/* THEME PANEL */
+.theme-panel{position:fixed;right:0;top:50%;transform:translateY(-50%);background:var(--surface);border:1px solid var(--border);border-radius:16px 0 0 16px;padding:16px 12px;z-index:998;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
+.theme-panel-title{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);text-align:center;writing-mode:vertical-rl;margin:0 auto 4px}
+.theme-dot{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:var(--transition);flex-shrink:0}
+.theme-dot:hover,.theme-dot.active{border-color:var(--text);transform:scale(1.15)}
+
+/* MAIN */
+main{padding-top:var(--nav-h)}
+
+/* HERO */
+.hero{min-height:calc(100vh - var(--nav-h));display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:60px 20px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(99,102,241,0.18) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(245,158,11,0.1) 0%,transparent 60%);z-index:0}
+.hero-particles{position:absolute;inset:0;z-index:0;overflow:hidden}
+.particle{position:absolute;border-radius:50%;background:var(--primary);opacity:0.15;animation:float linear infinite}
+@keyframes float{0%{transform:translateY(100vh) scale(0)}100%{transform:translateY(-100px) scale(1)}}
+.hero-content{position:relative;z-index:1;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:999px;padding:6px 16px;font-size:0.8rem;color:var(--primary-light);font-weight:600;margin-bottom:24px;backdrop-filter:blur(10px)}
+.hero-badge::before{content:'📚';font-size:1rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:20px;background:linear-gradient(135deg,var(--text) 0%,var(--primary-light) 50%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--text-muted);max-width:600px;margin:0 auto 36px;line-height:1.7}
+.hero-search{max-width:600px;margin:0 auto 24px;position:relative}
+.hero-search input{width:100%;padding:18px 60px 18px 24px;background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:50px;font-size:1rem;color:var(--text);outline:none;backdrop-filter:blur(10px);transition:var(--transition)}
+.hero-search input::placeholder{color:var(--text-muted)}
+.hero-search input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(99,102,241,0.15)}
+.hero-search button{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--primary);border:none;border-radius:50px;padding:10px 20px;color:#fff;font-weight:600;font-size:0.9rem;transition:var(--transition)}
+.hero-search button:hover{background:var(--primary-dark);transform:translateY(-50%) scale(1.02)}
+.quick-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.quick-tag{background:var(--card-bg);border:1px solid var(--card-border);border-radius:999px;padding:6px 16px;font-size:0.8rem;color:var(--text-muted);cursor:pointer;transition:var(--transition);backdrop-filter:blur(8px)}
+.quick-tag:hover{background:var(--primary);color:#fff;border-color:var(--primary);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:32px;justify-content:center;margin-top:48px;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat-num{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--primary-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat-label{font-size:0.75rem;color:var(--text-muted);margin-top:2px;font-weight:500}
+
+/* SECTIONS */
+.section{padding:80px 20px}
+.section-alt{background:var(--bg2)}
+.container{max-width:1300px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:48px}
+.section-eyebrow{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--primary);margin-bottom:10px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:12px;color:var(--text)}
+.section-sub{color:var(--text-muted);font-size:1rem;max-width:500px;margin:0 auto}
+
+/* ADVANCED SEARCH */
+.search-filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px}
+.filter-btn{padding:8px 18px;border-radius:999px;background:var(--card-bg);border:1.5px solid var(--card-border);color:var(--text-muted);font-size:0.85rem;font-weight:500;cursor:pointer;transition:var(--transition)}
+.filter-btn:hover,.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.adv-search-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.adv-search-grid input,.adv-search-grid select{padding:12px 16px;background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:var(--radius-sm);color:var(--text);font-size:0.9rem;font-family:inherit;outline:none;transition:var(--transition)}
+.adv-search-grid input:focus,.adv-search-grid select:focus{border-color:var(--primary)}
+.adv-search-grid select option{background:var(--bg2);color:var(--text)}
+.adv-search-grid input::placeholder{color:var(--text-muted)}
+.search-box-main{position:relative;grid-column:1/-1}
+.search-suggestions{position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);z-index:100;overflow:hidden;box-shadow:var(--shadow);display:none}
+.search-suggestions.show{display:block}
+.suggestion-item{padding:12px 16px;cursor:pointer;font-size:0.9rem;transition:var(--transition);display:flex;align-items:center;gap:10px;color:var(--text-muted)}
+.suggestion-item:hover{background:var(--card-bg);color:var(--text)}
+.suggestion-item .sug-icon{color:var(--primary);font-size:0.9rem}
+.btn-primary{background:var(--btn-bg);color:var(--btn-text);padding:14px 32px;border-radius:var(--radius-sm);font-weight:600;font-size:0.95rem;transition:var(--transition);border:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px);box-shadow:0 8px 24px rgba(99,102,241,0.3)}
+.btn-outline{background:transparent;color:var(--primary);padding:10px 20px;border-radius:var(--radius-sm);font-weight:600;font-size:0.85rem;border:1.5px solid var(--primary);transition:var(--transition);display:inline-flex;align-items:center;gap:6px}
+.btn-outline:hover{background:var(--primary);color:#fff;transform:translateY(-1px)}
+.btn-ghost{background:var(--card-bg);color:var(--text-muted);padding:8px 16px;border-radius:var(--radius-sm);font-weight:500;font-size:0.8rem;border:1px solid var(--card-border);transition:var(--transition)}
+.btn-ghost:hover{background:var(--primary);color:#fff}
+
+/* CARDS GRID */
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px}
+.book-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);overflow:hidden;transition:var(--transition);backdrop-filter:blur(10px);display:flex;flex-direction:column}
+.book-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.3);border-color:var(--primary)}
+.book-cover{aspect-ratio:2/3;background:linear-gradient(135deg,var(--surface),var(--bg2));display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.book-cover img{width:100%;height:100%;object-fit:cover}
+.book-cover .no-cover{font-size:2.5rem;opacity:0.3}
+.book-cover .lang-badge{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.7);color:#fff;font-size:0.65rem;font-weight:700;padding:3px 7px;border-radius:5px;text-transform:uppercase;backdrop-filter:blur(4px)}
+.book-info{padding:14px;flex:1;display:flex;flex-direction:column}
+.book-title{font-size:0.85rem;font-weight:700;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;color:var(--text)}
+.book-author{font-size:0.75rem;color:var(--primary-light);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.book-meta{font-size:0.7rem;color:var(--text-muted);margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap}
+.book-actions{display:flex;gap:6px;margin-top:auto;flex-wrap:wrap}
+.book-actions button{flex:1;padding:7px;font-size:0.7rem;border-radius:7px;font-weight:600;transition:var(--transition);min-width:0}
+.btn-view{background:var(--btn-bg);color:var(--btn-text);border:none}
+.btn-view:hover{filter:brightness(1.1)}
+.btn-wish{background:transparent;color:var(--text-muted);border:1px solid var(--border)}
+.btn-wish:hover{background:#ef4444;color:#fff;border-color:#ef4444}
+.btn-wish.wishlisted{background:#ef4444;color:#fff;border-color:#ef4444}
+.btn-lib{background:transparent;color:var(--text-muted);border:1px solid var(--border)}
+.btn-lib:hover{background:var(--accent);color:#000}
+
+/* SKELETON */
+.skeleton{background:linear-gradient(90deg,var(--surface) 25%,var(--border) 50%,var(--surface) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius-sm)}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skeleton-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);overflow:hidden}
+.skeleton-cover{aspect-ratio:2/3;width:100%}
+.skeleton-body{padding:14px;display:flex;flex-direction:column;gap:8px}
+.skeleton-line{height:10px;border-radius:5px}
+.skeleton-line.short{width:60%}
+
+/* AUTHOR CARDS */
+.authors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.author-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;text-align:center;transition:var(--transition);backdrop-filter:blur(10px)}
+.author-card:hover{transform:translateY(-5px);border-color:var(--primary);box-shadow:var(--shadow)}
+.author-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden;border:3px solid var(--card-border)}
+.author-avatar img{width:100%;height:100%;object-fit:cover}
+.author-name{font-weight:700;margin-bottom:6px;font-size:1rem}
+.author-books{font-size:0.8rem;color:var(--primary-light);margin-bottom:16px}
+.author-bio{font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
+
+/* CATEGORIES */
+.categories-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+.cat-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px 16px;text-align:center;cursor:pointer;transition:var(--transition);backdrop-filter:blur(10px);position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--primary) 0%,transparent 100%);opacity:0;transition:var(--transition)}
+.cat-card:hover::before{opacity:0.12}
+.cat-card:hover{transform:translateY(-4px);border-color:var(--primary);box-shadow:var(--shadow)}
+.cat-icon{font-size:2rem;margin-bottom:10px;display:block}
+.cat-name{font-weight:600;font-size:0.9rem;color:var(--text)}
+.cat-count{font-size:0.75rem;color:var(--text-muted);margin-top:4px}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px}
+.stat-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px 20px;text-align:center;backdrop-filter:blur(10px);position:relative;overflow:hidden;transition:var(--transition)}
+.stat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--primary),transparent);opacity:0.06;pointer-events:none}
+.stat-card:hover{transform:translateY(-4px);border-color:var(--primary)}
+.stat-icon{font-size:2rem;margin-bottom:12px}
+.stat-num{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--primary-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:0.8rem;color:var(--text-muted);margin-top:4px;font-weight:500}
+
+/* BOOK MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,0.5);position:relative}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;padding:24px;border-bottom:1px solid var(--border);gap:16px}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;flex:1}
+.modal-close{width:36px;height:36px;border-radius:50%;background:var(--card-bg);border:1px solid var(--border);color:var(--text-muted);font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:var(--transition)}
+.modal-close:hover{background:#ef4444;color:#fff;border-color:#ef4444}
+.modal-body{padding:24px;display:grid;grid-template-columns:150px 1fr;gap:24px}
+.modal-cover{aspect-ratio:2/3;border-radius:var(--radius-sm);overflow:hidden;background:var(--bg)}
+.modal-cover img{width:100%;height:100%;object-fit:cover}
+.modal-info{display:flex;flex-direction:column;gap:12px}
+.modal-meta{display:flex;flex-wrap:wrap;gap:8px}
+.meta-tag{background:var(--card-bg);border:1px solid var(--card-border);border-radius:999px;padding:4px 12px;font-size:0.75rem;color:var(--text-muted)}
+.modal-desc{font-size:0.9rem;color:var(--text-muted);line-height:1.7;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+
+/* WISHLIST SECTION */
+.wishlist-section{padding:60px 20px;background:var(--bg2)}
+.wishlist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-state .empty-icon{font-size:4rem;margin-bottom:16px;opacity:0.3}
+.empty-state p{font-size:1rem;margin-bottom:16px}
+
+/* TERMINAL FOOTER */
+footer{background:#000;border-top:1px solid #1a2a1a;padding:48px 20px 24px}
+.terminal-wrap{max-width:700px;margin:0 auto}
+.terminal-window{background:#0a0a0a;border:1px solid #1e3a1e;border-radius:12px;overflow:hidden;font-family:'Courier New',monospace;margin-bottom:32px}
+.terminal-titlebar{background:#111;border-bottom:1px solid #1e3a1e;padding:10px 16px;display:flex;align-items:center;gap:8px}
+.term-dot{width:12px;height:12px;border-radius:50%}
+.term-dot.red{background:#ff5f57}
+.term-dot.yellow{background:#ffbd2e}
+.term-dot.green{background:#28ca41}
+.terminal-title{margin-left:8px;font-size:0.75rem;color:#4a7c4a}
+.terminal-body{padding:20px;display:flex;flex-direction:column;gap:8px}
+.term-line{font-size:0.85rem;display:flex;align-items:flex-start;gap:8px;min-height:22px}
+.term-prompt{color:#28ca41;flex-shrink:0;font-weight:700}
+.term-cmd{color:#4fc3f7}
+.term-out{color:#81c784}
+.term-blink{display:inline-block;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.footer-bottom{text-align:center;border-top:1px solid #111;padding-top:24px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.footer-brand{color:#28ca41;font-family:'Courier New',monospace;font-size:0.8rem}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.footer-links a{color:#4a7c4a;font-family:'Courier New',monospace;font-size:0.75rem;transition:color 0.2s}
+.footer-links a:hover{color:#28ca41}
+
+/* SCROLL TOP */
+.scroll-top{position:fixed;bottom:24px;right:24px;width:46px;height:46px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;cursor:pointer;opacity:0;transform:translateY(20px);transition:var(--transition);z-index:900;box-shadow:0 4px 16px rgba(99,102,241,0.4)}
+.scroll-top.visible{opacity:1;transform:translateY(0)}
+.scroll-top:hover{transform:translateY(-3px);filter:brightness(1.1)}
+
+/* TOAST */
+.toast-wrap{position:fixed;bottom:80px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:3000}
+.toast{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 18px;font-size:0.85rem;box-shadow:var(--shadow);transform:translateX(120%);transition:transform 0.3s ease;display:flex;align-items:center;gap:8px;max-width:300px}
+.toast.show{transform:translateX(0)}
+.toast.success{border-left:3px solid #10b981}
+.toast.error{border-left:3px solid #ef4444}
+.toast.info{border-left:3px solid var(--primary)}
+
+/* LANG TOGGLE */
+.lang-label{font-size:0.75rem;color:var(--text-muted)}
+
+/* RECENTLY VIEWED */
+.recent-wrap{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin}
+.recent-wrap::-webkit-scrollbar{height:4px}
+.recent-item{flex-shrink:0;width:120px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:var(--transition)}
+.recent-item:hover{border-color:var(--primary);transform:translateY(-3px)}
+.recent-cover{aspect-ratio:2/3;background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.recent-cover img{width:100%;height:100%;object-fit:cover}
+.recent-cover .no-cover-sm{font-size:1.5rem;opacity:0.3}
+.recent-label{padding:8px;font-size:0.7rem;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--text)}
+
+/* LANG SUPPORT */
+[data-lang="ur"]{display:none}
+body.lang-ur [data-lang="en"]{display:none}
+body.lang-ur [data-lang="ur"]{display:inline}
+
+/* LOADING */
+.page-loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 0.4s}
+.page-loader.done{opacity:0;pointer-events:none}
+.loader-logo{width:64px;height:64px;border-radius:50%;border:3px solid transparent;border-top-color:var(--primary);animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-text{color:var(--text-muted);font-size:0.85rem;letter-spacing:1px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .theme-panel{display:none}
+  .modal-body{grid-template-columns:1fr}
+  .modal-cover{max-width:160px;margin:0 auto}
+  .books-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .adv-search-grid{grid-template-columns:1fr}
+  .section{padding:56px 16px}
+  .hero{padding:40px 16px;min-height:auto}
+}
+@media(max-width:480px){
+  .books-grid{grid-template-columns:repeat(2,1fr)}
+  .categories-grid{grid-template-columns:repeat(3,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:2rem}
+  .hero-stats{gap:20px}
+}
+</style>
+</head>
+<body>
+<!-- PAGE LOADER -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo"></div>
+  <div class="loader-text">Loading Empire Library Hub...</div>
+</div>
+
+<!-- SCROLL TOP -->
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<!-- TOASTS -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- THEME PANEL -->
+<div class="theme-panel">
+  <div class="theme-panel-title">Theme</div>
+  <div class="theme-dot active" style="background:#6366f1" onclick="setTheme('')" title="Default Dark"></div>
+  <div class="theme-dot" style="background:#f8fafc;border:1px solid #ddd" onclick="setTheme('light')" title="Light"></div>
+  <div class="theme-dot" style="background:#0ea5e9" onclick="setTheme('ocean')" title="Ocean Blue"></div>
+  <div class="theme-dot" style="background:#a855f7" onclick="setTheme('purple')" title="Purple Neon"></div>
+  <div class="theme-dot" style="background:#ec4899" onclick="setTheme('pink')" title="Pink Rose"></div>
+  <div class="theme-dot" style="background:#10b981" onclick="setTheme('emerald')" title="Emerald"></div>
+  <div class="theme-dot" style="background:#f97316" onclick="setTheme('orange')" title="Orange Sunset"></div>
+  <div class="theme-dot" style="background:#ef4444" onclick="setTheme('crimson')" title="Red Crimson"></div>
+  <div class="theme-dot" style="background:#00d4ff" onclick="setTheme('cyber')" title="Cyber Blue"></div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="logo-wrap">
+      <div class="logo-ring">
+        <img src="https://files.catbox.moe/ec53y6.jpg" alt="Empire Logo" class="logo-img" id="navLogo"
+          onerror="this.style.display='none';document.getElementById('navLogoFb').style.display='flex'">
+        <div class="logo-fallback" id="navLogoFb" style="display:none">E</div>
+      </div>
+      <span class="logo-text">Empire Library Hub</span>
+    </a>
+    <div class="nav-links">
+      <a href="#home" class="active">🏠 <span data-lang="en">Home</span><span data-lang="ur">ہوم</span></a>
+      <a href="#books">📚 <span data-lang="en">Books</span><span data-lang="ur">کتابیں</span></a>
+      <a href="#authors">✍️ <span data-lang="en">Authors</span><span data-lang="ur">مصنفین</span></a>
+      <a href="#categories">🗂️ <span data-lang="en">Categories</span><span data-lang="ur">زمرے</span></a>
+      <a href="#trending">🔥 <span data-lang="en">Trending</span><span data-lang="ur">ٹرینڈنگ</span></a>
+      <a href="#wishlist">❤️ <span data-lang="en">Favorites</span><span data-lang="ur">پسندیدہ</span></a>
+      <a href="#about">ℹ️ <span data-lang="en">About</span><span data-lang="ur">بارے میں</span></a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-icon" onclick="toggleDark()" title="Toggle Theme" id="darkToggle">🌙</button>
+      <button class="btn-icon" onclick="toggleLang()" title="Language" id="langBtn">🌐</button>
+      <button class="btn-icon hamburger" onclick="toggleMobileNav()" style="width:auto;height:auto;background:none;border:none;padding:4px" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="hamburger" onclick="toggleMobileNav()" id="ham">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="closeMobileNav()">🏠 Home</a>
+  <a href="#books" onclick="closeMobileNav()">📚 Books</a>
+  <a href="#authors" onclick="closeMobileNav()">✍️ Authors</a>
+  <a href="#categories" onclick="closeMobileNav()">🗂️ Categories</a>
+  <a href="#trending" onclick="closeMobileNav()">🔥 Trending</a>
+  <a href="#wishlist" onclick="closeMobileNav()">❤️ Favorites</a>
+  <a href="#about" onclick="closeMobileNav()">ℹ️ About</a>
+</div>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-content">
+    <div style="margin-bottom:24px">
+      <div style="width:90px;height:90px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--primary),var(--accent),var(--primary-light));margin:0 auto 16px;box-shadow:0 0 30px rgba(99,102,241,0.4)">
+        <img src="https://files.catbox.moe/ec53y6.jpg" alt="Empire Library Hub Logo" id="heroLogo"
+          style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block"
+          onerror="this.style.display='none';document.getElementById('heroLogoFb').style.display='flex'">
+        <div id="heroLogoFb" style="display:none;width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#fff">E</div>
+      </div>
+    </div>
+    <div class="hero-badge">Empire Library Hub — Your Digital Knowledge Center</div>
+    <h1 data-lang="en">Welcome to<br>Empire Library Hub</h1>
+    <h1 data-lang="ur" style="font-family:inherit;font-size:clamp(1.8rem,5vw,3.5rem)">ایمپائر لائبریری ہب میں خوش آمدید</h1>
+    <p data-lang="en">Discover millions of books, authors, and knowledge resources instantly. Your gateway to infinite learning.</p>
+    <p data-lang="ur">لاکھوں کتابیں، مصنفین اور علمی وسائل فوری دریافت کریں۔</p>
+    <div class="hero-search">
+      <input type="text" id="heroSearch" placeholder="Search books, authors, subjects..." onkeyup="heroSearchSuggest(this.value)" onkeypress="if(event.key==='Enter')heroSearchGo()">
+      <button onclick="heroSearchGo()">Search 🔍</button>
+      <div class="search-suggestions" id="heroSuggestions"></div>
+    </div>
+    <div class="quick-tags">
+      <span class="quick-tag" onclick="quickSearch('programming')">💻 Programming</span>
+      <span class="quick-tag" onclick="quickSearch('science')">🔬 Science</span>
+      <span class="quick-tag" onclick="quickSearch('history')">📜 History</span>
+      <span class="quick-tag" onclick="quickSearch('mathematics')">📐 Mathematics</span>
+      <span class="quick-tag" onclick="quickSearch('fiction')">📖 Fiction</span>
+      <span class="quick-tag" onclick="quickSearch('islam')">☪️ Islamic</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" id="cntBooks">20M+</div><div class="hero-stat-label">Books</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="cntAuthors">8M+</div><div class="hero-stat-label">Authors</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="cntSearches" data-count="0">0</div><div class="hero-stat-label">Searches Made</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">190+</div><div class="hero-stat-label">Languages</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANCED SEARCH -->
+<section class="section section-alt" id="search">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">🔍 Advanced Search</div>
+      <h2 class="section-title">Find Any Book Instantly</h2>
+      <p class="section-sub">Search by title, author, ISBN, subject, publisher, or year</p>
+    </div>
+    <div class="search-filters">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('books',this)">📚 Books</button>
+      <button class="filter-btn" onclick="setFilter('authors',this)">✍️ Authors</button>
+      <button class="filter-btn" onclick="setFilter('subjects',this)">🗂️ Subjects</button>
+    </div>
+    <div class="adv-search-grid">
+      <div class="search-box-main" style="position:relative">
+        <input type="text" id="mainSearch" placeholder="📖 Book Title..." style="width:100%;padding:14px 18px;background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:var(--radius-sm);color:var(--text);font-size:0.95rem;font-family:inherit;outline:none;transition:var(--transition)" oninput="liveSearchSuggest(this.value)">
+        <div class="search-suggestions" id="mainSuggestions"></div>
+      </div>
+      <input type="text" id="authorSearch" placeholder="✍️ Author Name...">
+      <input type="text" id="isbnSearch" placeholder="🔢 ISBN...">
+      <input type="text" id="subjectSearch" placeholder="🗂️ Subject...">
+      <input type="text" id="publisherSearch" placeholder="🏢 Publisher...">
+      <select id="langSearch">
+        <option value="">🌐 All Languages</option>
+        <option value="eng">English</option>
+        <option value="urd">Urdu</option>
+        <option value="ara">Arabic</option>
+        <option value="fre">French</option>
+        <option value="ger">German</option>
+        <option value="chi">Chinese</option>
+        <option value="spa">Spanish</option>
+        <option value="hin">Hindi</option>
+      </select>
+      <input type="number" id="yearSearch" placeholder="📅 Year (e.g. 2020)" min="1000" max="2025">
+    </div>
+    <div style="text-align:center;margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-primary" onclick="doAdvSearch()">🔍 <span data-lang="en">Search Books</span><span data-lang="ur">تلاش کریں</span></button>
+      <button class="btn-outline" onclick="clearSearch()">✕ Clear</button>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKS RESULTS -->
+<section class="section" id="books">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">📚 Library</div>
+      <h2 class="section-title" id="booksSectionTitle">Search Results</h2>
+      <p class="section-sub" id="booksSectionSub">Search above to discover books</p>
+    </div>
+    <div id="booksResults">
+      <div style="text-align:center;padding:60px 20px">
+        <div style="font-size:4rem;margin-bottom:16px">🔍</div>
+        <p style="color:var(--text-muted);font-size:1rem">Use the search above to discover millions of books</p>
+        <p style="color:var(--text-muted);font-size:0.85rem;margin-top:8px">Try searching for "programming", "history", or any author name</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <button class="btn-outline" id="loadMoreBtn" style="display:none" onclick="loadMore()">Load More Books</button>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHORS -->
+<section class="section section-alt" id="authors">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">✍️ Author Explorer</div>
+      <h2 class="section-title">Discover Authors</h2>
+      <p class="section-sub">Explore brilliant minds and their literary works</p>
+    </div>
+    <div style="max-width:500px;margin:0 auto 32px;position:relative">
+      <input type="text" id="authorInput" placeholder="Search authors..." style="width:100%;padding:14px 50px 14px 18px;background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:50px;color:var(--text);font-size:0.95rem;font-family:inherit;outline:none;transition:var(--transition)" onkeypress="if(event.key==='Enter')searchAuthors()">
+      <button onclick="searchAuthors()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--primary);border:none;border-radius:50px;padding:8px 18px;color:#fff;font-weight:600;font-size:0.85rem;cursor:pointer">Search</button>
+    </div>
+    <div class="authors-grid" id="authorsGrid">
+      <!-- Preset popular authors -->
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">🗂️ Categories</div>
+      <h2 class="section-title">Browse by Category</h2>
+      <p class="section-sub">Explore books across all knowledge domains</p>
+    </div>
+    <div class="categories-grid" id="categoriesGrid"></div>
+  </div>
+</section>
+
+<!-- TRENDING -->
+<section class="section section-alt" id="trending">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">🔥 Trending</div>
+      <h2 class="section-title">Trending Books</h2>
+      <p class="section-sub">Most popular books right now</p>
+    </div>
+    <div class="books-grid" id="trendingGrid"></div>
+  </div>
+</section>
+
+<!-- NEW DISCOVERIES -->
+<section class="section" id="discoveries">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">✨ Discover</div>
+      <h2 class="section-title">New Discoveries</h2>
+      <p class="section-sub">Fresh finds from the Open Library universe</p>
+    </div>
+    <div class="books-grid" id="discoveriesGrid"></div>
+    <div style="text-align:center;margin-top:32px">
+      <button class="btn-outline" onclick="loadDiscoveries()">🔄 Refresh Discoveries</button>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">📊 Statistics</div>
+      <h2 class="section-title">Library Dashboard</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-num">20M+</div><div class="stat-label">Total Books</div></div>
+      <div class="stat-card"><div class="stat-icon">✍️</div><div class="stat-num">8M+</div><div class="stat-label">Authors</div></div>
+      <div class="stat-card"><div class="stat-icon">🔍</div><div class="stat-num" id="searchCount">0</div><div class="stat-label">Searches Today</div></div>
+      <div class="stat-card"><div class="stat-icon">🗂️</div><div class="stat-num">14</div><div class="stat-label">Categories</div></div>
+      <div class="stat-card"><div class="stat-icon">🌐</div><div class="stat-num">190+</div><div class="stat-label">Languages</div></div>
+      <div class="stat-card"><div class="stat-icon">❤️</div><div class="stat-num" id="wishCount">0</div><div class="stat-label">Books Wishlisted</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENTLY VIEWED -->
+<section class="section" id="recent">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">🕐 History</div>
+      <h2 class="section-title">Recently Viewed</h2>
+    </div>
+    <div class="recent-wrap" id="recentWrap">
+      <div class="empty-state" style="padding:20px 40px;text-align:center;width:100%">
+        <div class="empty-icon">🕐</div>
+        <p>No recently viewed books yet</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WISHLIST -->
+<section class="section section-alt" id="wishlist">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">❤️ Favorites</div>
+      <h2 class="section-title">My Reading Wishlist</h2>
+      <p class="section-sub">Books you've saved for later</p>
+    </div>
+    <div id="wishlistGrid">
+      <div class="empty-state">
+        <div class="empty-icon">💔</div>
+        <p>Your wishlist is empty. Start saving books you love!</p>
+        <button class="btn-primary" onclick="document.getElementById('heroSearch').focus();window.scrollTo({top:0,behavior:'smooth'})">Discover Books</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center">
+      <div>
+        <div class="section-eyebrow">ℹ️ About</div>
+        <h2 class="section-title" style="text-align:left">About Empire Library Hub</h2>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:16px">Empire Library Hub is a premium digital library platform powered by the Open Library API. Built for students, readers, researchers, and book lovers worldwide.</p>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:24px">Discover over 20 million books, explore thousands of authors, and build your personal reading lists — all in one beautiful, fast, and free platform.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-sm);padding:16px 20px;text-align:center;min-width:100px">
+            <div style="font-size:1.5rem;font-weight:800;color:var(--primary-light)">100%</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Free Forever</div>
+          </div>
+          <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-sm);padding:16px 20px;text-align:center;min-width:100px">
+            <div style="font-size:1.5rem;font-weight:800;color:var(--primary-light)">Open</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Source Data</div>
+          </div>
+          <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-sm);padding:16px 20px;text-align:center;min-width:100px">
+            <div style="font-size:1.5rem;font-weight:800;color:var(--primary-light)">PWA</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Installable</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:32px;backdrop-filter:blur(10px)">
+        <h3 style="font-weight:700;margin-bottom:20px">Platform Features</h3>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem"><span style="color:var(--primary)">✓</span> <span style="color:var(--text-muted)">20M+ Books from Open Library API</span></div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem"><span style="color:var(--primary)">✓</span> <span style="color:var(--text-muted)">Advanced multi-field search</span></div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem"><span style="color:var(--primary)">✓</span> <span style="color:var(--text-muted)">Personal wishlist & reading lists</span></div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem"><span style="color:var(--primary)">✓</span> <span style="color:var(--text-muted)">9 beautiful themes</span></div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem"><span style="color:var(--primary)">✓</span> <span style="color:var(--text-muted)">English & Urdu interface</span></div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem"><span style="color:var(--primary)">✓</span> <span style="color:var(--text-muted)">Fully mobile responsive</span></div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem"><span style="color:var(--primary)">✓</span> <span style="color:var(--text-muted)">Author explorer & biography</span></div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem"><span style="color:var(--primary)">✓</span> <span style="color:var(--text-muted)">PWA — install as an app</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- TERMINAL FOOTER -->
+<footer>
+  <div class="terminal-wrap">
+    <div class="terminal-window">
+      <div class="terminal-titlebar">
+        <div class="term-dot red"></div>
+        <div class="term-dot yellow"></div>
+        <div class="term-dot green"></div>
+        <span class="terminal-title">empire-library — bash</span>
+      </div>
+      <div class="terminal-body" id="terminalBody"></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-brand">© 2025 Empire Library Hub — Powered By Empire Tech Zone</div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#books">Books</a>
+        <a href="#authors">Authors</a>
+        <a href="#categories">Categories</a>
+        <a href="https://openlibrary.org" target="_blank">Open Library</a>
+      </div>
+      <div style="color:#2d4a2d;font-family:'Courier New',monospace;font-size:0.7rem">Built with ❤️ by Empire Tech Zone</div>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOK MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="bookModal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">Book Details</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ==================== LOGO LOADER ====================
+function loadLogos() {
+  const LOGO_URL = 'https://files.catbox.moe/ec53y6.jpg';
+  ['navLogo','heroLogo'].forEach(id => {
+    const img = document.getElementById(id);
+    if (!img) return;
+    const testImg = new Image();
+    testImg.onload = () => { img.src = LOGO_URL; img.style.display='block'; };
+    testImg.onerror = () => {
+      img.style.display='none';
+      const fb = document.getElementById(id+'Fb');
+      if(fb) fb.style.display='flex';
+    };
+    testImg.src = LOGO_URL;
+  });
+}
+
+// ==================== STATE ====================
+let state = {
+  theme: localStorage.getItem('elh_theme') || '',
+  lang: localStorage.getItem('elh_lang') || 'en',
+  dark: localStorage.getItem('elh_dark') !== 'false',
+  wishlist: JSON.parse(localStorage.getItem('elh_wish') || '[]'),
+  recent: JSON.parse(localStorage.getItem('elh_recent') || '[]'),
+  searchCount: parseInt(localStorage.getItem('elh_sc') || '0'),
+  currentQuery: '',
+  currentPage: 1,
+  searchFilter: 'all',
+  totalFound: 0,
+};
+
+// ==================== INIT ====================
+window.addEventListener('DOMContentLoaded', () => {
+  loadLogos();
+  applyTheme(state.theme);
+  applyLang(state.lang);
+  if (!state.dark) document.body.classList.add('theme-light');
+  renderCategories();
+  loadTrending();
+  loadDiscoveries();
+  loadAuthors();
+  renderWishlist();
+  renderRecent();
+  updateStats();
+  createParticles();
+  startTerminal();
+  setTimeout(() => document.getElementById('pageLoader').classList.add('done'), 800);
+});
+
+// ==================== PARTICLES ====================
+function createParticles() {
+  const wrap = document.getElementById('heroParticles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 8 + 3;
+    p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-duration:${8+Math.random()*12}s;animation-delay:${Math.random()*10}s;opacity:${0.05+Math.random()*0.15}`;
+    wrap.appendChild(p);
+  }
+}
+
+// ==================== THEME ====================
+function setTheme(t) {
+  state.theme = t;
+  localStorage.setItem('elh_theme', t);
+  applyTheme(t);
+  document.querySelectorAll('.theme-dot').forEach((d,i) => {
+    const themes=['','light','ocean','purple','pink','emerald','orange','crimson','cyber'];
+    d.classList.toggle('active', themes[i]===t);
+  });
+}
+function applyTheme(t) {
+  document.body.className = document.body.className.replace(/theme-\w+/g,'').trim();
+  if (t) document.body.classList.add('theme-'+t);
+  if (state.lang==='ur') document.body.classList.add('lang-ur');
+}
+function toggleDark() {
+  state.dark = !state.dark;
+  localStorage.setItem('elh_dark', state.dark);
+  if (!state.dark) { document.body.classList.add('theme-light'); document.getElementById('darkToggle').textContent='☀️'; }
+  else { document.body.classList.remove('theme-light'); if(state.theme==='light') setTheme(''); document.getElementById('darkToggle').textContent='🌙'; }
+}
+
+// ==================== LANG ====================
+function toggleLang() {
+  state.lang = state.lang === 'en' ? 'ur' : 'en';
+  localStorage.setItem('elh_lang', state.lang);
+  applyLang(state.lang);
+}
+function applyLang(l) {
+  document.body.classList.toggle('lang-ur', l==='ur');
+  document.getElementById('langBtn').textContent = l==='en' ? '🌐' : '🇵🇰';
+}
+
+// ==================== MOBILE NAV ====================
+function toggleMobileNav() { document.getElementById('mobileNav').classList.toggle('open'); }
+function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+// ==================== SCROLL ====================
+window.addEventListener('scroll', () => {
+  const s = window.scrollY > 300;
+  document.getElementById('scrollTop').classList.toggle('visible', s);
+  // Active nav
+  const secs=['home','search','books','authors','categories','trending','wishlist','about'];
+  let cur='home';
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<100)cur=id});
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    const h=a.getAttribute('href').slice(1);
+    a.classList.toggle('active',h===cur);
+  });
+});
+
+// ==================== TOAST ====================
+function toast(msg, type='info') {
+  const wrap = document.getElementById('toastWrap');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.textContent = msg;
+  wrap.appendChild(t);
+  setTimeout(()=>t.classList.add('show'),10);
+  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),300)},3000);
+}
+
+// ==================== STATS ====================
+function updateStats() {
+  document.getElementById('searchCount').textContent = state.searchCount;
+  document.getElementById('wishCount').textContent = state.wishlist.length;
+  animateCounter('cntSearches', state.searchCount);
+}
+function animateCounter(id, target) {
+  const el = document.getElementById(id);
+  if(!el) return;
+  let c=0; const step=Math.max(1,Math.floor(target/30));
+  const t=setInterval(()=>{c=Math.min(c+step,target);el.textContent=c;if(c>=target)clearInterval(t)},50);
+}
+
+// ==================== API ====================
+async function openLibSearch(params) {
+  const base = 'https://openlibrary.org/search.json';
+  const url = base + '?' + new URLSearchParams({...params, limit:12});
+  try {
+    const r = await fetch(url);
+    const d = await r.json();
+    return d;
+  } catch(e) { return null; }
+}
+
+function getCover(coverId, size='M') {
+  if (!coverId) return null;
+  return `https://covers.openlibrary.org/b/id/${coverId}-${size}.jpg`;
+}
+
+// ==================== SEARCH ====================
+let searchDebounce;
+function setFilter(f, el) {
+  state.searchFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function heroSearchGo() {
+  const q = document.getElementById('heroSearch').value.trim();
+  if (!q) return;
+  document.getElementById('mainSearch').value = q;
+  doAdvSearch();
+  document.getElementById('books').scrollIntoView({behavior:'smooth'});
+  document.getElementById('heroSuggestions').classList.remove('show');
+}
+
+function quickSearch(q) {
+  document.getElementById('heroSearch').value = q;
+  document.getElementById('mainSearch').value = q;
+  doAdvSearch();
+  document.getElementById('books').scrollIntoView({behavior:'smooth'});
+}
+
+function heroSearchSuggest(v) {
+  clearTimeout(searchDebounce);
+  const box = document.getElementById('heroSuggestions');
+  if (!v || v.length < 2) { box.classList.remove('show'); return; }
+  searchDebounce = setTimeout(async () => {
+    const data = await openLibSearch({q:v, limit:5});
+    if (!data || !data.docs) return;
+    box.innerHTML = data.docs.slice(0,5).map(b=>`
+      <div class="suggestion-item" onclick="document.getElementById('heroSearch').value='${b.title.replace(/'/g,"\\'")}';heroSearchGo()">
+        <span class="sug-icon">📖</span>
+        <span>${b.title}</span>
+        ${b.author_name?`<small style="color:var(--text-muted);margin-left:auto">${b.author_name[0]}</small>`:''}
+      </div>`).join('');
+    box.classList.add('show');
+  }, 300);
+}
+
+function liveSearchSuggest(v) {
+  clearTimeout(searchDebounce);
+  const box = document.getElementById('mainSuggestions');
+  if (!v || v.length < 2) { box.classList.remove('show'); return; }
+  searchDebounce = setTimeout(async () => {
+    const data = await openLibSearch({title:v, limit:5});
+    if (!data || !data.docs) return;
+    box.innerHTML = data.docs.slice(0,5).map(b=>`
+      <div class="suggestion-item" onclick="document.getElementById('mainSearch').value='${b.title.replace(/'/g,"\\'")}';box.classList.remove('show')">
+        <span class="sug-icon">📖</span>
+        <span>${b.title}</span>
+      </div>`).join('');
+    box.classList.add('show');
+  }, 300);
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('#heroSearch') && !e.target.closest('#heroSuggestions')) document.getElementById('heroSuggestions').classList.remove('show');
+  if (!e.target.closest('#mainSearch') && !e.target.closest('#mainSuggestions')) document.getElementById('mainSuggestions').classList.remove('show');
+});
+
+// Keyboard shortcut
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey||e.metaKey) && e.key==='k') { e.preventDefault(); document.getElementById('heroSearch').focus(); window.scrollTo({top:0,behavior:'smooth'}); }
+  if (e.key==='Escape') closeModal();
+});
+
+async function doAdvSearch() {
+  const title = document.getElementById('mainSearch').value.trim();
+  const author = document.getElementById('authorSearch').value.trim();
+  const isbn = document.getElementById('isbnSearch').value.trim();
+  const subject = document.getElementById('subjectSearch').value.trim();
+  const publisher = document.getElementById('publisherSearch').value.trim();
+  const lang = document.getElementById('langSearch').value;
+  const year = document.getElementById('yearSearch').value.trim();
+
+  if (!title && !author && !isbn && !subject && !publisher && !lang && !year) {
+    toast('Please enter at least one search term', 'error'); return;
+  }
+
+  const params = {};
+  if (title) params.title = title;
+  if (author) params.author = author;
+  if (isbn) params.isbn = isbn;
+  if (subject) params.subject = subject;
+  if (publisher) params.publisher = publisher;
+  if (lang) params.language = lang;
+  if (year) { params.first_publish_year = year; }
+  if (!Object.keys(params).length) params.q = title || author || subject;
+
+  state.currentQuery = params;
+  state.currentPage = 1;
+  state.searchCount++;
+  localStorage.setItem('elh_sc', state.searchCount);
+  updateStats();
+
+  const grid = document.getElementById('booksResults');
+  grid.innerHTML = renderSkeletons(8);
+  document.getElementById('booksSectionTitle').textContent = 'Search Results';
+  document.getElementById('booksSectionSub').textContent = 'Searching...';
+  document.getElementById('loadMoreBtn').style.display='none';
+
+  const data = await openLibSearch({...params, limit:12});
+  if (!data) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><p>Connection error. Check your internet.</p></div>'; return; }
+
+  state.totalFound = data.numFound || 0;
+  document.getElementById('booksSectionTitle').textContent = `Found ${state.totalFound.toLocaleString()} Books`;
+  const q = title || author || subject || isbn || publisher || '';
+  document.getElementById('booksSectionSub').textContent = q ? `Results for "${q}"` : 'Search results';
+
+  if (!data.docs || !data.docs.length) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>No books found. Try a different search term.</p></div>';
+    return;
+  }
+  grid.innerHTML = '';
+  const g = document.createElement('div'); g.className='books-grid'; grid.appendChild(g);
+  data.docs.forEach(b => g.appendChild(createBookCard(b)));
+  if (state.totalFound > 12) document.getElementById('loadMoreBtn').style.display='block';
+}
+
+async function loadMore() {
+  state.currentPage++;
+  const params = {...state.currentQuery, limit:12, offset:(state.currentPage-1)*12};
+  const data = await openLibSearch(params);
+  if (!data || !data.docs) return;
+  const g = document.querySelector('#booksResults .books-grid');
+  if (g) data.docs.forEach(b=>g.appendChild(createBookCard(b)));
+  if (state.currentPage*12 >= state.totalFound) document.getElementById('loadMoreBtn').style.display='none';
+}
+
+function clearSearch() {
+  ['mainSearch','authorSearch','isbnSearch','subjectSearch','publisherSearch','yearSearch'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('langSearch').value='';
+  document.getElementById('booksResults').innerHTML=`<div style="text-align:center;padding:60px 20px"><div style="font-size:4rem;margin-bottom:16px">🔍</div><p style="color:var(--text-muted)">Use the search above to discover millions of books</p></div>`;
+  document.getElementById('booksSectionTitle').textContent='Search Results';
+  document.getElementById('booksSectionSub').textContent='Search above to discover books';
+  document.getElementById('loadMoreBtn').style.display='none';
+}
+
+// ==================== BOOK CARD ====================
+function createBookCard(b) {
+  const card = document.createElement('div');
+  card.className = 'book-card';
+  const coverId = b.cover_i || (b.cover_edition_key ? null : null);
+  const coverUrl = coverId ? getCover(coverId) : null;
+  const key = b.key || '';
+  const isWished = state.wishlist.some(w=>w.key===key);
+
+  card.innerHTML = `
+    <div class="book-cover" onclick="viewBook('${key.replace(/'/g,"\\'")}','${escStr(b.title)}','${escStr(b.author_name?b.author_name[0]:'')}','${coverId||''}','${escStr(b.first_publish_year||'')}','${escStr(b.language?b.language[0]:'')}','${escStr(b.edition_count||'')}','${escStr(b.subject?b.subject.slice(0,3).join(', '):'')}')">
+      ${coverUrl ? `<img src="${coverUrl}" alt="${escStr(b.title)}" loading="lazy" onerror="this.parentNode.innerHTML='<span class=no-cover>📚</span>'">` : '<span class="no-cover">📚</span>'}
+      ${b.language && b.language[0] ? `<span class="lang-badge">${b.language[0]}</span>` : ''}
+    </div>
+    <div class="book-info">
+      <div class="book-title">${b.title}</div>
+      <div class="book-author">${b.author_name ? b.author_name[0] : 'Unknown Author'}</div>
+      <div class="book-meta">
+        ${b.first_publish_year ? `<span>📅 ${b.first_publish_year}</span>` : ''}
+        ${b.edition_count ? `<span>📖 ${b.edition_count} eds</span>` : ''}
+      </div>
+      <div class="book-actions">
+        <button class="btn-view" onclick="viewBook('${key.replace(/'/g,"\\'")}','${escStr(b.title)}','${escStr(b.author_name?b.author_name[0]:'')}','${coverId||''}','${escStr(b.first_publish_year||'')}','${escStr(b.language?b.language[0]:'')}','${escStr(b.edition_count||'')}','${escStr(b.subject?b.subject.slice(0,3).join(', '):'')}')">👁 View</button>
+        <button class="btn-wish ${isWished?'wishlisted':''}" onclick="toggleWish(this,'${key}','${escStr(b.title)}','${escStr(b.author_name?b.author_name[0]:'')}','${coverId||''}')">❤️</button>
+        ${key ? `<button class="btn-lib" onclick="window.open('https://openlibrary.org${key}','_blank')">🔗</button>` : ''}
+      </div>
+    </div>`;
+  return card;
+}
+
+function escStr(s) { return String(s||'').replace(/'/g,"&apos;").replace(/"/g,"&quot;").replace(/\n/g,'').slice(0,80); }
+
+function renderSkeletons(n) {
+  return `<div class="books-grid">${Array(n).fill(`<div class="skeleton-card"><div class="skeleton skeleton-cover"></div><div class="skeleton-body"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div><div class="skeleton skeleton-line short"></div></div></div>`).join('')}</div>`;
+}
+
+// ==================== BOOK MODAL ====================
+function viewBook(key, title, author, coverId, year, lang, editions, subjects) {
+  document.getElementById('modalTitle').textContent = decodeHTMLEntities(title);
+  const coverUrl = coverId ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg` : null;
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-cover">
+      ${coverUrl ? `<img src="${coverUrl}" alt="${title}" onerror="this.src='';this.parentNode.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem>📚</div>'">` : '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem">📚</div>'}
+    </div>
+    <div class="modal-info">
+      <div>
+        <h3 style="font-family:\'Playfair Display\',serif;font-size:1.2rem;margin-bottom:8px">${decodeHTMLEntities(title)}</h3>
+        <p style="color:var(--primary-light);font-weight:600;margin-bottom:12px">✍️ ${author || 'Unknown Author'}</p>
+      </div>
+      <div class="modal-meta">
+        ${year ? `<span class="meta-tag">📅 ${year}</span>` : ''}
+        ${lang ? `<span class="meta-tag">🌐 ${lang.toUpperCase()}</span>` : ''}
+        ${editions ? `<span class="meta-tag">📖 ${editions} editions</span>` : ''}
+      </div>
+      ${subjects ? `<div><p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px;font-weight:600">SUBJECTS</p><p style="font-size:0.85rem;color:var(--text-muted)">${decodeHTMLEntities(subjects)}</p></div>` : ''}
+      <div class="modal-actions">
+        ${key ? `<button class="btn-primary" onclick="window.open('https://openlibrary.org${key}','_blank')">📖 Read on Open Library</button>` : ''}
+        <button class="btn-outline" onclick="toggleWishFromModal('${key}','${escStr(title)}','${author}','${coverId}')">❤️ Add to Wishlist</button>
+      </div>
+      <p style="font-size:0.75rem;color:var(--text-muted);margin-top:8px">Data provided by Open Library — The world's largest open book catalog</p>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  // Add to recent
+  addToRecent({key, title: decodeHTMLEntities(title), author, coverId});
+}
+
+function decodeHTMLEntities(str) {
+  const d=document.createElement('div');d.innerHTML=str;return d.textContent||d.innerText||str;
+}
+
+function toggleWishFromModal(key,title,author,coverId) {
+  const idx = state.wishlist.findIndex(w=>w.key===key);
+  if (idx>-1) { state.wishlist.splice(idx,1); toast('Removed from wishlist','info'); }
+  else { state.wishlist.push({key,title,author,coverId}); toast('Added to wishlist ❤️','success'); }
+  localStorage.setItem('elh_wish', JSON.stringify(state.wishlist));
+  renderWishlist(); updateStats();
+}
+
+function toggleWish(btn, key, title, author, coverId) {
+  const idx = state.wishlist.findIndex(w=>w.key===key);
+  if (idx>-1) { state.wishlist.splice(idx,1); btn.classList.remove('wishlisted'); toast('Removed from wishlist','info'); }
+  else { state.wishlist.push({key,title,author,coverId}); btn.classList.add('wishlisted'); toast('Added to wishlist ❤️','success'); }
+  localStorage.setItem('elh_wish', JSON.stringify(state.wishlist));
+  renderWishlist(); updateStats();
+}
+
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+
+// ==================== WISHLIST ====================
+function renderWishlist() {
+  const grid = document.getElementById('wishlistGrid');
+  if (!state.wishlist.length) {
+    grid.innerHTML=`<div class="empty-state"><div class="empty-icon">💔</div><p>Your wishlist is empty. Start saving books you love!</p><button class="btn-primary" onclick="document.getElementById('heroSearch').focus();window.scrollTo({top:0,behavior:'smooth'})">Discover Books</button></div>`;
+    return;
+  }
+  grid.innerHTML='';
+  const g=document.createElement('div'); g.className='books-grid'; grid.appendChild(g);
+  state.wishlist.forEach(b=>{
+    const card=document.createElement('div'); card.className='book-card';
+    const cu=b.coverId?getCover(b.coverId):null;
+    card.innerHTML=`
+      <div class="book-cover"><span class="no-cover">${cu?`<img src="${cu}" loading="lazy">`:' 📚'}</span></div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.author||'Unknown'}</div>
+        <div class="book-actions">
+          ${b.key?`<button class="btn-view" onclick="window.open('https://openlibrary.org${b.key}','_blank')">📖 Read</button>`:''}
+          <button class="btn-wish wishlisted" onclick="toggleWish(this,'${b.key}','${escStr(b.title)}','${b.author}','${b.coverId||''}');renderWishlist()">❤️</button>
+        </div>
+      </div>`;
+    g.appendChild(card);
+  });
+}
+
+// ==================== RECENT ====================
+function addToRecent(b) {
+  state.recent = state.recent.filter(r=>r.key!==b.key);
+  state.recent.unshift(b);
+  if (state.recent.length>20) state.recent.pop();
+  localStorage.setItem('elh_recent', JSON.stringify(state.recent));
+  renderRecent();
+}
+
+function renderRecent() {
+  const wrap=document.getElementById('recentWrap');
+  if (!state.recent.length) { wrap.innerHTML=`<div class="empty-state" style="padding:20px 40px;text-align:center;width:100%"><div class="empty-icon">🕐</div><p>No recently viewed books yet</p></div>`; return; }
+  wrap.innerHTML=state.recent.slice(0,20).map(b=>{
+    const cu=b.coverId?getCover(b.coverId,'S'):null;
+    return `<div class="recent-item" onclick="viewBook('${b.key}','${escStr(b.title)}','${escStr(b.author||'')}','${b.coverId||''}','','','','')">
+      <div class="recent-cover">${cu?`<img src="${cu}" loading="lazy" onerror="this.parentNode.innerHTML='<span class=no-cover-sm>📚</span>'">`: '<span class="no-cover-sm">📚</span>'}</div>
+      <div class="recent-label">${b.title}</div>
+    </div>`;
+  }).join('');
+}
+
+// ==================== CATEGORIES ====================
+const CATEGORIES=[
+  {icon:'💻',name:'Programming',q:'programming'},
+  {icon:'🔬',name:'Science',q:'science'},
+  {icon:'⚙️',name:'Technology',q:'technology'},
+  {icon:'📜',name:'History',q:'history'},
+  {icon:'📐',name:'Mathematics',q:'mathematics'},
+  {icon:'📝',name:'Literature',q:'literature'},
+  {icon:'🎓',name:'Education',q:'education'},
+  {icon:'☪️',name:'Islamic Studies',q:'islam'},
+  {icon:'💼',name:'Business',q:'business'},
+  {icon:'🏥',name:'Health',q:'health'},
+  {icon:'🧙',name:'Fantasy',q:'fantasy'},
+  {icon:'📖',name:'Fiction',q:'fiction'},
+  {icon:'🧬',name:'Biography',q:'biography'},
+  {icon:'📕',name:'Novels',q:'novels'},
+];
+function renderCategories() {
+  document.getElementById('categoriesGrid').innerHTML=CATEGORIES.map(c=>`
+    <div class="cat-card" onclick="quickSearch('${c.q}');document.getElementById('books').scrollIntoView({behavior:'smooth'})">
+      <span class="cat-icon">${c.icon}</span>
+      <div class="cat-name">${c.name}</div>
+    </div>`).join('');
+}
+
+// ==================== TRENDING ====================
+const TRENDING_QUERIES = ['Harry Potter', 'Clean Code', 'The Alchemist', 'Dune', 'Atomic Habits', 'Sapiens', '1984', 'The Great Gatsby'];
+async function loadTrending() {
+  const grid = document.getElementById('trendingGrid');
+  grid.innerHTML = renderSkeletons(6).replace('books-grid','').replace('<div class="books-grid">','').replace('</div>','');
+  grid.className='books-grid';
+  grid.innerHTML = renderSkeletons(8).split('books-grid')[1].split('>').slice(1).join('>'); // just show skeleton
+  grid.innerHTML='';
+  
+  const promises = TRENDING_QUERIES.slice(0,8).map(q=>openLibSearch({q, limit:1}));
+  const results = await Promise.all(promises);
+  results.forEach(d => { if(d && d.docs && d.docs[0]) grid.appendChild(createBookCard(d.docs[0])); });
+  if (!grid.children.length) grid.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:40px">Could not load trending books. Check connection.</p>';
+}
+
+// ==================== DISCOVERIES ====================
+const DISCOVERY_QUERIES = ['magic','adventure','mystery','philosophy','psychology','economics','poetry','romance'];
+async function loadDiscoveries() {
+  const grid = document.getElementById('discoveriesGrid');
+  grid.innerHTML='';
+  const idx = Math.floor(Math.random()*5);
+  const q = DISCOVERY_QUERIES[idx];
+  const data = await openLibSearch({q, limit:8, offset: Math.floor(Math.random()*50)});
+  if (data && data.docs) data.docs.forEach(b=>grid.appendChild(createBookCard(b)));
+}
+
+// ==================== AUTHORS ====================
+const DEFAULT_AUTHORS = ['J.K. Rowling','Stephen King','Agatha Christie','George Orwell','Tolkien','Shakespeare','Mark Twain','Leo Tolstoy'];
+async function loadAuthors() {
+  const grid = document.getElementById('authorsGrid');
+  grid.innerHTML='<p style="color:var(--text-muted);text-align:center;grid-column:1/-1">Loading authors...</p>';
+  const results = await Promise.all(DEFAULT_AUTHORS.slice(0,6).map(a=>fetch(`https://openlibrary.org/search/authors.json?q=${encodeURIComponent(a)}&limit=1`).then(r=>r.json()).catch(()=>null)));
+  grid.innerHTML='';
+  results.forEach((d,i)=>{
+    if(!d||!d.docs||!d.docs[0]){
+      grid.appendChild(createAuthorCard({name:DEFAULT_AUTHORS[i],work_count:'?'})); return;
+    }
+    grid.appendChild(createAuthorCard(d.docs[0]));
+  });
+}
+
+async function searchAuthors() {
+  const q = document.getElementById('authorInput').value.trim();
+  if (!q) return;
+  const grid = document.getElementById('authorsGrid');
+  grid.innerHTML='<p style="color:var(--text-muted);text-align:center;grid-column:1/-1">Searching...</p>';
+  try {
+    const r = await fetch(`https://openlibrary.org/search/authors.json?q=${encodeURIComponent(q)}&limit=8`);
+    const d = await r.json();
+    grid.innerHTML='';
+    if (!d.docs || !d.docs.length) { grid.innerHTML='<p style="color:var(--text-muted);text-align:center;grid-column:1/-1">No authors found.</p>'; return; }
+    d.docs.slice(0,8).forEach(a=>grid.appendChild(createAuthorCard(a)));
+  } catch(e) { grid.innerHTML='<p style="color:var(--text-muted);text-align:center;grid-column:1/-1">Error loading authors.</p>'; }
+}
+
+function createAuthorCard(a) {
+  const card = document.createElement('div');
+  card.className = 'author-card';
+  const photo = a.key ? `https://covers.openlibrary.org/a/olid/${a.key.replace('/authors/','')}-M.jpg` : null;
+  card.innerHTML=`
+    <div class="author-avatar">
+      ${photo ? `<img src="${photo}" alt="${a.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'" loading="lazy"><span style="display:none;font-size:1.8rem">👤</span>` : '<span style="font-size:1.8rem">👤</span>'}
+    </div>
+    <div class="author-name">${a.name||'Unknown'}</div>
+    <div class="author-books">📚 ${a.work_count||'?'} works</div>
+    ${a.top_subjects ? `<div class="author-bio">${a.top_subjects.slice(0,3).join(', ')}</div>` : ''}
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-outline" onclick="quickSearch('${escStr(a.name)}');document.getElementById('books').scrollIntoView({behavior:'smooth'})">View Books</button>
+      ${a.key ? `<button class="btn-ghost" onclick="window.open('https://openlibrary.org${a.key}','_blank')">Profile</button>` : ''}
+    </div>`;
+  return card;
+}
+
+// ==================== TERMINAL ====================
+const TERMINAL_LINES = [
+  {prompt:'$',cmd:'system_status',out:'● ONLINE'},
+  {prompt:'$',cmd:'platform',out:'Empire Library Hub v2.0'},
+  {prompt:'$',cmd:'powered_by',out:'Empire Tech Zone'},
+  {prompt:'$',cmd:'library_engine',out:'Open Library API — openlibrary.org'},
+  {prompt:'$',cmd:'total_books',out:'20,000,000+ catalogued'},
+  {prompt:'$',cmd:'knowledge_mode',out:'ACTIVE ██████████ 100%'},
+  {prompt:'$',cmd:'welcome',out:'Keep Learning, Keep Growing 🚀'},
+  {prompt:'$',cmd:'_',out:''},
+];
+let termIdx=0, termPhase=0;
+function startTerminal() {
+  const body = document.getElementById('terminalBody');
+  function nextLine() {
+    if (termIdx >= TERMINAL_LINES.length) {
+      body.innerHTML += `<div class="term-line"><span class="term-prompt">$</span><span class="term-cmd"> <span class="term-blink">_</span></span></div>`;
+      return;
+    }
+    const l = TERMINAL_LINES[termIdx];
+    const lineEl = document.createElement('div'); lineEl.className='term-line';
+    lineEl.innerHTML=`<span class="term-prompt">${l.prompt}</span><span class="term-cmd"> ${l.cmd}</span>`;
+    body.appendChild(lineEl);
+    if (l.out) {
+      setTimeout(()=>{
+        const out=document.createElement('div'); out.className='term-line';
+        out.innerHTML=`<span class="term-prompt" style="visibility:hidden">$</span><span class="term-out">  ${l.out}</span>`;
+        body.appendChild(out);
+        termIdx++; setTimeout(nextLine, 400);
+      },200);
+    } else { termIdx++; setTimeout(nextLine,200); }
+  }
+  setTimeout(nextLine, 1000);
+}
+</script>
+</body>
+</html>
